@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Вход</title>
+  <style>
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f7fafc;
+  display: flex; flex-direction: column; align-items: center;
+  min-height: 100vh; margin: 0;
+}
+.form-container {
+  background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,.09); border-radius: 14px;
+  padding: 30px 35px; margin-top: 60px; min-width: 320px; max-width: 370px;
+}
+h2 { text-align: center; margin-top: 0; color: #2d3a4a; }
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 100%; padding: 13px 14px; margin: 12px 0 18px 0; border: 1px solid #e0e3ea;
+  border-radius: 8px; font-size: 16px; background: #f7fafc;
+  transition: border-color 0.15s;
+}
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+  border-color: #4b93fa; outline: none;
+}
+button[type="submit"] {
+  width: 100%; background: #3793fa; color: #fff; border: none; border-radius: 8px;
+  padding: 13px 0; font-size: 18px; font-weight: bold; cursor: pointer;
+  transition: background 0.18s;
+}
+button[type="submit"]:hover { background: #2776c9; }
+.error { color: #d22d2d; text-align: center; margin-bottom: 10px; font-weight: bold; }
+.link { text-align: center; margin-top: 15px; }
+a { color: #3793fa; text-decoration: none; }
+a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<div class="form-container">
+  <h2>Вход</h2>
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <form method="post">
+    <input type="text" name="username" placeholder="Имя пользователя" required>
+    <input type="password" name="password" placeholder="Пароль" required>
+    <button type="submit">Войти</button>
+  </form>
+  <div class="link">
+    <a href="{{ url_for('register') }}">Регистрация</a>
+  </div>
+</div>
+</body>
+</html>

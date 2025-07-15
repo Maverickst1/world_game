@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Wordle Online — Таблица результатов</title>
+  <style>
+    body { font-family: Arial,sans-serif; background: #f9f9f9; margin: 0; display: flex; flex-direction: column; align-items: center;}
+    table { border-collapse: collapse; margin: 12px 0;}
+    td,th { border: 1px solid #aaa; padding: 4px 12px; }
+    th { background: #eee;}
+    h2,h3 { margin-bottom: 5px;}
+    #back {margin: 20px 0;}
+    .your { background: #d9ffd2;}
+  </style>
+</head>
+<body>
+  <h2>Результаты: {{ username|capitalize }}</h2>
+  <div id="back"><a href="/game">← Вернуться в игру</a></div>
+
+  <h3>Ваши результаты</h3>
+  <table>
+    <tr><th>Дата</th><th>Слово</th><th>Попытки</th><th>Время (сек)</th><th>Score</th></tr>
+    {% for r in user_results %}
+      <tr class="your"><td>{{ r.date }}</td><td>{{ r.word }}</td><td>{{ r.attempts if r.attempts > 0 else '-' }}</td><td>{{ r.seconds }}</td><td>{{ r.score }}</td></tr>
+    {% endfor %}
+  </table>
+
+  <h3>Топ-50 лучших</h3>
+  <table>
+    <tr><th>Игрок</th><th>Дата</th><th>Слово</th><th>Попытки</th><th>Время (сек)</th><th>Score</th></tr>
+    {% for r, user in all_results %}
+      <tr{% if user.username == username %} class="your"{% endif %}>
+        <td>{{ user.username|capitalize }}</td>
+        <td>{{ r.date }}</td>
+        <td>{{ r.word }}</td>
+        <td>{{ r.attempts if r.attempts > 0 else '-' }}</td>
+        <td>{{ r.seconds }}</td>
+        <td>{{ r.score }}</td>
+      </tr>
+    {% endfor %}
